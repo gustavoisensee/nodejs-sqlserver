@@ -1,0 +1,99 @@
+.grid {
+	max-width: 69em;
+	list-style: none;
+	margin: 30px auto;
+	padding: 0;
+}
+
+.grid li {
+	display: block;
+	float: left;
+	padding: 7px;
+	width: 33%;
+	/*border: 1px solid black;*/
+}
+
+.grid li a,
+.grid li img {
+	outline: none;
+	border: none;
+	display: block;
+	max-width: 100%;
+}
+
+
+@media screen and (max-width: 900px) {
+	.grid li {
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.grid li {
+		width: 100%;
+	}
+}
+
+header {
+	float: left;
+	width: 100%;
+	margin-bottom: 22px;
+	text-align: center;
+}
+
+	header a {
+		margin: 0px 5px 0px 5px;
+	}
+
+	header .menu {
+		float: left;
+		width: 25%;
+		border: 1px solid;
+	}
+
+footer {
+	float: left;
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	bottom: 0;
+	z-index: -1;
+}	
+
+/* fade */
+/* Safari and Chrome */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}​
+
+/* Opera */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}​
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.fadeItem {
+    -webkit-animation: fadein 1.4s; /* Safari and Chrome */
+    -moz-animation: fadein 1.4s; /* Firefox */
+    -ms-animation: fadein 1.4s; /* Internet Explorer */
+    -o-animation: fadein 1.4s; /* Opera */
+    animation: fadein 1.4s;
+}
