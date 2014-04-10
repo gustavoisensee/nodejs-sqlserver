@@ -17,24 +17,63 @@
 	</head>
 	<body>
 		<div ng-controller="AppController">
-			<header>
-				<button class="btn btn-primary" ng-click="listUsers(2)">Find Users</button>
-			</header>
+			<div class="row">
+				<div class="col-md-3"></div>
+			  	<div class="col-md-6">
+					<button class="btn btn-primary" ng-click="listUsers(2)">Find Users</button>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">New</button>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
 
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<td>Id</td>
-						<td>Nome</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="item in list">
-						<td>{{item.id}}</td>
-						<td>{{item.nome}}</td>
-					</tr>
-				</tbody>
-			</table>
+			<div class="row">
+			  <div class="col-md-3"></div>
+			  <div class="col-md-6">
+			  		<div class="table-responsive">
+	  					<table class="table table-bordered">
+							<thead>
+								<tr>
+									<td>Id</td>
+									<td>Nome</td>
+									<td></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in list">
+									<td>{{item.id}}</td>
+									<td>{{item.nome}}</td>
+									<td>
+										<button type="button" class="btn btn-primary" ng-click="editUser(item.id)">Edit</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+			  </div>
+			  <div class="col-md-3"></div>
+			</div>
+			
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">New user</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="name">Name</label>
+								<input type="text" class="form-control" id="name" placeholder="Enter name">
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" ng-click="saveUser()">Save</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<footer>
 				<span>footer</span>

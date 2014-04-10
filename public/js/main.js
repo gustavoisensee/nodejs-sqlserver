@@ -10,6 +10,10 @@ var app = angular.module('App', []),
 
 	controller = app.controller('AppController', ['$scope', function($scope) {
   		$scope.list = [];
+  		$scope.user = {
+			id: 0,
+			name: ''  			
+  		};
 
 		$scope.listUsers = function (id) {
 			$.ajax({
@@ -23,7 +27,17 @@ var app = angular.module('App', []),
 					$scope.list = data;
 				}
 			});
-		}
+		};
+
+		$scope.editUser = function (id) {
+			$('#myModal').modal('show');
+			console.log(id);
+		};
+
+		$scope.saveUser = function () {
+			$('#myModal').modal('hide');
+			console.log('Success');
+		};
 
 	}]);
 
