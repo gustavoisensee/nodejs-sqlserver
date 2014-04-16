@@ -97,3 +97,15 @@ footer {
     -o-animation: fadein 1.4s; /* Opera */
     animation: fadein 1.4s;
 }
+
+.table .code {
+	width: 20px;
+}
+
+.table .date {
+	width: 100px;
+}
+
+.table .buttons {
+	width: 150px;
+}

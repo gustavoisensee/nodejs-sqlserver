@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="App">
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Test node with sql server</title>
+		
+		<link rel="stylesheet" type="text/css" href="css/site.css" />
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/datepicker3.css">
+
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/jquery.maskedinput.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+
+		<script src="js/bootstrap-datepicker.js"></script>
+		<script src="js/bootstrap-datepicker.pt-BR.js"></script>
+		<script src="js/angular.min.js"></script>
+
+		<script src="js/main.js"></script>
+	</head>
+	<body>
+		<div ng-controller="AppController">
+			
+			<!-- buttons -->
+			<div class="row form-group">
+				<div class="col-md-3"></div>
+			  	<div class="col-md-6">
+					<button class="btn btn-primary" ng-click="listUsers()">Find Users</button>
+					<button class="btn btn-primary" ng-click="cleanUser()" data-toggle="modal" data-target="#myModal">New</button>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+
+			<!-- filter -->
+			<div class="row form-group">
+				<div class="col-md-3"></div>
+			  	<div class="col-md-6">
+					<input type="text" class="form-control" id="filterGrid" ng-model="search.$" placeholder="Enter filter">
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+
+			<!-- table -->
+			<div class="row form-group">
+			  <div class="col-md-3"></div>
+			  <div class="col-md-6">
+			  		<div class="table-responsive">
+	  					<table class="table table-bordered">
+							<thead>
+								<tr>
+									<td class="code">Id</td>
+									<td>Name</td>
+									<td class="date">Date of birth</td>
+									<td class="buttons"></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in list | filter:search">
+									<td class="code">{{item.id}}</td>
+									<td>{{item.name}}</td>
+									<td class="date">{{item.datebirth | date:'dd/MM/yyyy'}}</td>
+									<td class="buttons">
+										<button type="button" class="btn btn-primary" ng-click="editUser(item.id)">Edit</button>
+										<button type="button" class="btn btn-primary" ng-click="addUserToRemove(item.id)" data-toggle="modal" data-target="#myConfirmModal">Remove</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+			  </div>
+			  <div class="col-md-3"></div>
+			</div>
+			
+			<!-- Modal od register user -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">New user</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="name">Name</label>
+								<input type="text" ng-model="user.name" class="form-control" id="name" placeholder="Enter name">
+							</div>
+							<div class="form-group">
+								<label for="name">Date of birth</label>
+								<input type="text" ng-model="user.datebirth" data-date-format="dd/mm/yyyy" class="form-control" id="datebirth" placeholder="dd/MM/yyyy">
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" ng-click="saveUser()">Save</button>
+							</div>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
+			<!-- Confirm Modal -->
+			<div class="modal fade" id="myConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Confirm Modal</h4>
+						</div>
+						<div class="modal-body">
+							<p>Are you sure that wish to remove this item?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" ng-click="removeUser()">Yes</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
+			<footer>
+				<span>footer</span>
+			</footer>
+		</div>
+
+	</body>
+</html>
