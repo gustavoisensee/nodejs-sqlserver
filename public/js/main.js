@@ -13,7 +13,8 @@ var app = angular.module('App', []),
   		$scope.list = [];
   		$scope.user = {
 			id: 0,
-			name: ''  			
+			name: '',
+			datebirth: ''
   		};
 
 		$scope.listUsers = function () {
@@ -24,6 +25,14 @@ var app = angular.module('App', []),
 					$scope.list = data;
 				}
 			});
+		};
+
+		$scope.cleanUser = function () {
+			$scope.user = {
+				id: 0,
+				name: '',
+				datebirth: ''
+	  		};
 		};
 
 		$scope.editUser = function (id) {
@@ -37,7 +46,7 @@ var app = angular.module('App', []),
 					$scope.user = data;
 					$scope.user.datebirth = $filter('date')($scope.user.datebirth, 'dd/MM/yyyy');
 					$('#myModal').modal('show');
-					$scope.listUsers();
+					//$scope.listUsers();
 				}
 			});
 		};
