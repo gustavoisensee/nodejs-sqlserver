@@ -19,7 +19,8 @@ var app = angular.module('App', []),
 
 		$scope.listUsers = function () {
 			$.ajax({
-				url: "/findUsers",
+				type: 'GET',
+				url: "/user",
 				async: false,
 				success: function (data) {
 					$scope.list = data;
@@ -37,7 +38,8 @@ var app = angular.module('App', []),
 
 		$scope.editUser = function (id) {
 			$.ajax({
-				url: "/findUserById",
+				type: 'GET',
+				url: "/user",
 				async: false,
 				data: {
 					id: id
@@ -53,7 +55,8 @@ var app = angular.module('App', []),
 
 		$scope.saveUser = function () {
 			$.ajax({
-				url: "/saveUser",
+				type: 'POST'
+				url: "/user",
 				async: false,
 				data: {
 					user: $scope.user
@@ -71,7 +74,8 @@ var app = angular.module('App', []),
 
 		$scope.removeUser = function () {
 			$.ajax({
-				url: "/removeUser",
+				type: 'DELETE',
+				url: "/user",
 				async: false,
 				data: {
 					id: $scope.user.id

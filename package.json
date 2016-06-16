@@ -7,6 +7,8 @@
   },
   "dependencies": {
     "express": "3.5.1",
-    "jade": "*"
+    "jade": "*",
+    "lodash": "^4.13.1",
+    "tedious-promises": "^0.4.0"
   }
 }
