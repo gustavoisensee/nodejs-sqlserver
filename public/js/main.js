@@ -6,87 +6,72 @@
  License: MIT
 */
 
-var app = angular.module('App', []),
+angular.module('App', [])
+.controller('AppController', ['$scope', '$filter', '$http', function($scope, $filter, $http) {
+	$scope.search = '';
+	$scope.list = [];
+	$scope.user = {
+		id: 0,
+		name: '',
+		datebirth: ''
+	};
 
-	controller = app.controller('AppController', ['$scope', '$filter', function($scope, $filter) {
-		$scope.search = '';
-  		$scope.list = [];
-  		$scope.user = {
+	$scope.listUsers = function () {
+		$http({
+			method: 'GET',
+			url: "/user",
+		}).then(function(d){
+			$scope.list = d.data;		
+		});
+	};
+
+	$scope.cleanUser = function () {
+		$scope.user = {
 			id: 0,
 			name: '',
 			datebirth: ''
   		};
+	};
 
-		$scope.listUsers = function () {
-			$.ajax({
-				type: 'GET',
-				url: "/user",
-				async: false,
-				success: function (data) {
-					$scope.list = data;
-				}
-			});
-		};
+	$scope.editUser = function (id) {
+		$http({
+			method: 'GET',
+			url: "/user/" + id,
+		}).then(function(d) {
+				$scope.user = d.data;
+				$scope.user.datebirth = $filter('date')($scope.user.datebirth, 'dd/MM/yyyy');
+				$('#myModal').modal('show');
+				//$scope.listUsers();
+		})
+	};
 
-		$scope.cleanUser = function () {
-			$scope.user = {
-				id: 0,
-				name: '',
-				datebirth: ''
-	  		};
-		};
+	$scope.saveUser = function () {
+		$http({
+			method: 'POST',
+			url: "/user",
+			data: JSON.stringify({
+				user: $scope.user
+			})
+		}).then(function(d){
+			$('#myModal').modal('hide');
+			$scope.listUsers();
+		});
+	};
 
-		$scope.editUser = function (id) {
-			$.ajax({
-				type: 'GET',
-				url: "/user",
-				async: false,
-				data: {
-					id: id
-				},
-				success: function (data) {
-					$scope.user = data;
-					$scope.user.datebirth = $filter('date')($scope.user.datebirth, 'dd/MM/yyyy');
-					$('#myModal').modal('show');
-					//$scope.listUsers();
-				}
-			});
-		};
+	$scope.addUserToRemove = function (id) {
+		$scope.user.id = id;
+	};
 
-		$scope.saveUser = function () {
-			$.ajax({
-				type: 'POST'
-				url: "/user",
-				async: false,
-				data: {
-					user: $scope.user
-				},
-				success: function (data) {
-					$('#myModal').modal('hide');
-					$scope.listUsers();
-				}
-			});
-		};
-
-		$scope.addUserToRemove = function (id) {
-			$scope.user.id = id;
-		};
-
-		$scope.removeUser = function () {
-			$.ajax({
-				type: 'DELETE',
-				url: "/user",
-				async: false,
-				data: {
-					id: $scope.user.id
-				},
-				success: function (data) {
-					$('#myConfirmModal').modal('hide');
-					$scope.listUsers();
-				}
-			});
-		}
-	}]);
+	$scope.removeUser = function () {
+		$http({
+			method: 'DELETE',
+			url: "/user/" + $scope.user.id
+		}).then(function(d){
+			$('#myConfirmModal').modal('hide');
+			$scope.listUsers();
+		});
+	}
+}]);
 
 $(document).ready(function () {
 	$("#datebirth").mask("99/99/9999");
@@ -94,4 +79,3 @@ $(document).ready(function () {
 		language: 'pt-BR'
 	});
 });
-

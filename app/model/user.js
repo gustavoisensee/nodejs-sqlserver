@@ -17,23 +17,23 @@ const get = (id) => {
 const post = (user) => {
 	user.datebirth = moment(user.datebirth, "DD/MM/YYYY")._d;
 	return base.tp.sql('insert into [user] (name, datebirth) values (@name, @datebirth)')
-		.parameter('name', TYPES.VarChar, user.name)
-		.parameter('datebirth', TYPES.DateTime, new Date(user.datebirth))
+		.parameter('name', base.TYPES.VarChar, user.name)
+		.parameter('datebirth', base.TYPES.DateTime, new Date(user.datebirth))
 		.execute();
 };
 
 const put = (id, user) => {
 	user.datebirth = moment(user.datebirth, "DD/MM/YYYY")._d;
 	return base.tp.sql('update [user] set name = @name, datebirth = @datebirth where id = @id')
-		.parameter('id', TYPES.Int, parseInt(user.id))
-		.parameter('name', TYPES.VarChar, user.name)
-		.parameter('datebirth', TYPES.DateTime, new Date(user.datebirth))
+		.parameter('id', base.TYPES.Int, parseInt(user.id))
+		.parameter('name', base.TYPES.VarChar, user.name)
+		.parameter('datebirth', base.TYPES.DateTime, new Date(user.datebirth))
 		.execute();
 };
 
 const _delete = (id) => {
 	return base.tp.sql('delete from [user] where id = @id')
-		.parameter('id', TYPES.Int, parseInt(id))
+		.parameter('id', base.TYPES.Int, parseInt(id))
 		.execute();
 };
 

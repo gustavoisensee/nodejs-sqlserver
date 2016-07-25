@@ -1,48 +1,27 @@
 'use strict';
 
+const base    = require('./base');
+const model   = require('../model/user');
+const factory = require('../factory/user');
+
 module.exports = (router) => {
-
-	const user    = require('../model/user');
-	const factory = require('../factory/user');
-
 	router
-	    .get('/', (req, res, next) => {
+		.get('/', (req, res, next) => {
 		  res.render('users');
 		})
 		.get('/user', (req, res, next) => {
-			user.all().then((results) => {
-				res.json(results.map(user => new factory(user)));
-			}).fail((err) => {
-				res.json(err);
-			});
+			base.execute.all(model, factory, req, res);
 		})
 		.post('/user', (req, res, next) => {
-        	user.create(req.query).then((results) =>{
-				res.json(results.map(user => new factory(user)));
-			}).fail((err) => {
-				res.json(err);
-			});
-        })
-		.get('/user/:id', (req, res) => {
-			user.get(req.params.id).then((results) => {
-				res.json(results.map(user => new factory(user)));
-			}).fail((err) => {
-				res.json(err);
-			});
+    	base.execute.post(model, factory, req, res);
+    })
+		.get('/user/:id', (req, res, next) => {
+			base.execute.get(model, factory, req, res);
 		})
 		.put('/user/:id', (req, res, next) => {
-   			user.update(req.params.id, req.query).then((results) =>{
-				res.json(results.map(user => new factory(user)));
-			}).fail((err) => {
-				res.json(err);
-			});	
-        })
-        .delete('/user/:id', (req, res, next) => {
-        	user.delete(req.params.id).then((results) => {
-				res.json(results.map(user => new factory(user)));
-			}).fail((err) => {
-				res.json(err);
-			});
-        });
-
-}
+ 			base.execute.put(model, factory, req, res);	
+    })
+    .delete('/user/:id', (req, res, next) => {
+    	base.execute.delete(model, factory, req, res);
+    });
+};
