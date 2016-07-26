@@ -2,7 +2,7 @@ const config = {
 	database: {
 		userName: 'nodejs',
 		password: 'nodejs123',
-		server: 'db-stigeo-dev12.labtrans.ufsc.br',
+		server: 'localhost',
 		options: {
 			instanceName: 'devweb2012',
 			database: 'nodejs-sqlserver'

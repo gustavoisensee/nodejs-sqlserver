@@ -1,7 +1,7 @@
 
 /*
- Main v1.0.1
- Date: 2014-04-16
+ Main v2.0.0
+ Date: 2016-07-26
  (c) 2013 Gustavo Isensee
  License: MIT
 */
@@ -30,7 +30,7 @@ angular.module('App', [])
 			id: 0,
 			name: '',
 			datebirth: ''
-  		};
+		};
 	};
 
 	$scope.editUser = function (id) {
@@ -41,17 +41,16 @@ angular.module('App', [])
 				$scope.user = d.data;
 				$scope.user.datebirth = $filter('date')($scope.user.datebirth, 'dd/MM/yyyy');
 				$('#myModal').modal('show');
-				//$scope.listUsers();
 		})
 	};
 
 	$scope.saveUser = function () {
+		const method = ($scope.user.id > 0 ? 'PUT' : 'POST');
+		const url = ($scope.user.id > 0 ? '/user/' + $scope.user.id : '/user');
 		$http({
-			method: 'POST',
-			url: "/user",
-			data: JSON.stringify({
-				user: $scope.user
-			})
+			method: method,
+			url: url,
+			params: $scope.user
 		}).then(function(d){
 			$('#myModal').modal('hide');
 			$scope.listUsers();

@@ -27,7 +27,6 @@ const get = (model, factory, req, res, _result = true) => {
 };
 
 const post = (model, factory, req, res) => {
-	console.log(req)
 	let params = (req.body || req.query);
 	params = (typeof params === 'string' ? JSON.parse(params) : params);
 

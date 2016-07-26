@@ -2,33 +2,30 @@
 <html lang="en" ng-app="App">
 	<head>
 		<meta charset="utf-8">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Test node with sql server</title>
+		<title>Nodejs + Tedious + AngularJS + Sql Server</title>
 		
+		<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/lib/datepicker3.css">
 		<link rel="stylesheet" type="text/css" href="css/site.css" />
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/datepicker3.css">
 
-		<script src="js/jquery-1.11.0.min.js"></script>
-		<script src="js/jquery.maskedinput.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/lib/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="js/lib/jquery.maskedinput.min.js"></script>
+		<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
 
-		<script src="js/bootstrap-datepicker.js"></script>
-		<script src="js/bootstrap-datepicker.pt-BR.js"></script>
-		<script src="js/angular.min.js"></script>
-
-		<script src="js/main.js"></script>
+		<script type="text/javascript" src="js/lib/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="js/lib/bootstrap-datepicker.pt-BR.js"></script>
+		<script type="text/javascript" src="js/lib/angular.min.js"></script>
 	</head>
 	<body>
-		<div ng-controller="AppController">
+		<div ng-controller="AppController" ng-init="listUsers()">
 			
 			<!-- buttons -->
 			<div class="row form-group">
 				<div class="col-md-3"></div>
 			  	<div class="col-md-6">
-					<button class="btn btn-primary" ng-click="listUsers()">Find Users</button>
 					<button class="btn btn-primary" ng-click="cleanUser()" data-toggle="modal" data-target="#myModal">New</button>
 				</div>
 				<div class="col-md-3"></div>
@@ -99,7 +96,7 @@
 						</div>
 					</div><!-- /.modal-content -->
 				</div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->
+			</div>
 
 			<!-- Confirm Modal -->
 			<div class="modal fade" id="myConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -118,12 +115,13 @@
 						</div>
 					</div><!-- /.modal-content -->
 				</div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->
+			</div>
 
 			<footer>
 				<span>footer</span>
 			</footer>
 		</div>
 
+		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>
